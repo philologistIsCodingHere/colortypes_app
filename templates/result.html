@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="result-content">
+    <div class="result-header">
+        <a href="{{ url_for('index') }}" class="back-button">← Назад</a>
+        <h2>Результат анализа</h2>
+    </div>
+
+    <div class="result-grid">
+        <div class="result-left">
+            <div class="image-section">
+                <h3>👤 Анализируемое фото</h3>
+                <div class="image-container">
+                    <img src="data:image/jpeg;base64,{{ image_with_face }}" alt="Analyzed photo">
+                </div>
+            </div>
+            
+            <div class="parameters-section">
+                <h3>🔍 Параметры анализа</h3>
+                <div class="parameters-grid">
+                    <div class="parameter-card">
+                        <div class="parameter-icon">🌡️</div>
+                        <div class="parameter-info">
+                            <span class="parameter-name">Теплота</span>
+                            <span class="parameter-value">{{ "%.1f"|format(features.warmth) }}</span>
+                        </div>
+                    </div>
+                    <div class="parameter-card">
+                        <div class="parameter-icon">💡</div>
+                        <div class="parameter-info">
+                            <span class="parameter-name">Яркость</span>
+                            <span class="parameter-value">{{ "%.1f"|format(features.brightness) }}</span>
+                        </div>
+                    </div>
+                    <div class="parameter-card">
+                        <div class="parameter-icon">🎨</div>
+                        <div class="parameter-info">
+                            <span class="parameter-name">Насыщенность</span>
+                            <span class="parameter-value">{{ "%.1f"|format(features.saturation) }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="result-right">
+            <!-- Главный результат - используем CSS классы вместо inline стилей -->
+            <div class="main-result color-{{ prediction }}">
+                <div class="result-icon">🎯</div>
+                <div class="result-text">
+                    <h3>Ваш цветотип</h3>
+                    <h1 class="color-{{ prediction }}-text">{{ prediction_text }}</h1>
+                </div>
+            </div>
+
+            <div class="probabilities-section">
+                <h3>📈 Вероятности</h3>
+                {% for prob in probabilities %}
+                <div class="probability-item">
+                    <div class="probability-header">
+                        <span class="probability-name">{{ prob.name }}</span>
+                        <span class="probability-value">{{ prob.value }}%</span>
+                    </div>
+                    <div class="probability-bar">
+                        <!-- Используем data-атрибуты вместо inline стилей -->
+                        <div class="probability-fill" 
+                             data-width="{{ prob.value }}" 
+                             data-color="{{ prob.color }}"
+                             data-color-type="{{ prob.name|lower|replace('️', '')|replace(' ', '-') }}">
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="recommendations-section">
+                <h3>💎 Рекомендации</h3>
+                <div class="recommendation-card">
+                    <h4>{{ recommendations.title }}</h4>
+                    <div class="recommendation-item">
+                        <strong>💄 Макияж:</strong> {{ recommendations.makeup }}
+                    </div>
+                    <div class="recommendation-item">
+                        <strong>👗 Цвета:</strong> {{ recommendations.colors }}
+                    </div>
+                    <div class="recommendation-item">
+                        <strong>💎 Аксессуары:</strong> {{ recommendations.accessories }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <a href="{{ url_for('index') }}" class="new-analysis-button">
+                    🔄 Проанализировать другое фото
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript для установки стилей -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Устанавливаем ширину и цвет для прогресс-баров
+    const probabilityFills = document.querySelectorAll('.probability-fill');
+    probabilityFills.forEach(element => {
+        const width = element.getAttribute('data-width');
+        const color = element.getAttribute('data-color');
+        
+        if (width && color) {
+            element.style.width = width + '%';
+            element.style.backgroundColor = color;
+        }
+    });
+});
+</script>
+{% endblock %}

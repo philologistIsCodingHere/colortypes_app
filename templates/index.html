@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="main-content">
+    <div class="upload-section">
+        <div class="upload-card">
+            <div class="upload-icon">📸</div>
+            <h2>Загрузите фото с лицом</h2>
+            <p>ИИ проанализирует вашу кожу и определит цветотип</p>
+            
+            <form action="/analyze" method="post" enctype="multipart/form-data" class="upload-form" id="uploadForm">
+                <div class="file-input-wrapper">
+                    <input type="file" id="photo" name="photo" accept="image/*" required>
+                    <label for="photo" class="file-input-label" id="fileInputLabel">
+                        <span class="file-input-text" id="fileInputText">Выберите файл</span>
+                        <span class="file-input-button">Обзор</span>
+                    </label>
+                </div>
+                
+                <!-- Блок для отображения имени файла -->
+                <div class="file-name-display" id="fileNameDisplay">
+                    Выбран файл: <span id="fileName"></span>
+                </div>
+                
+                <button type="submit" class="analyze-button">
+                    🎯 Проанализировать
+                </button>
+            </form>
+            
+            <div class="tips">
+                <h3>💡 Советы для лучшего результата:</h3>
+                <ul>
+                    <li>Используйте фото с четким видом лица</li>
+                    <li>Убедитесь, что лицо хорошо освещено</li>
+                    <li>Избегайте фото в темных очках</li>
+                    <li>Лучше без яркого макияжа</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="info-section">
+        <h2>🎨 Поддерживаемые цветотипы</h2>
+        <div class="color-types-grid">
+            <div class="color-type-card winter">
+                <h3>❄️ ЗИМА</h3>
+                <p>Холодные, яркие, контрастные тона</p>
+            </div>
+            <div class="color-type-card spring">
+                <h3>🌼 ВЕСНА</h3>
+                <p>Теплые, яркие, свежие тона</p>
+            </div>
+            <div class="color-type-card summer">
+                <h3>🌸 ЛЕТО</h3>
+                <p>Холодные, приглушенные, мягкие тона</p>
+            </div>
+            <div class="color-type-card autumn">
+                <h3>🍁 ОСЕНЬ</h3>
+                <p>Теплые, приглушенные, насыщенные тона</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const fileInput = document.getElementById('photo');
+    const fileInputLabel = document.getElementById('fileInputLabel');
+    const fileInputText = document.getElementById('fileInputText');
+    const fileNameDisplay = document.getElementById('fileNameDisplay');
+    const fileNameSpan = document.getElementById('fileName');
+    
+    // Обработчик выбора файла
+    fileInput.addEventListener('change', function() {
+        if (this.files && this.files[0]) {
+            const fileName = this.files[0].name;
+            
+            // Обновляем текст
+            fileInputText.textContent = fileName;
+            fileNameSpan.textContent = fileName;
+            
+            // Показываем имя файла
+            fileInputLabel.classList.add('has-file');
+            fileNameDisplay.style.display = 'block';
+            
+            console.log('✅ Файл выбран:', fileName);
+        } else {
+            // Сбрасываем если файл не выбран
+            fileInputText.textContent = 'Выберите файл';
+            fileInputLabel.classList.remove('has-file');
+            fileNameDisplay.style.display = 'none';
+        }
+    });
+    
+    // Обработчик отправки формы
+    document.getElementById('uploadForm').addEventListener('submit', function(e) {
+        if (!fileInput.files || !fileInput.files[0]) {
+            e.preventDefault();
+            alert('❌ Пожалуйста, выберите файл!');
+            return;
+        }
+        console.log('📤 Отправка формы с файлом:', fileInput.files[0].name);
+    });
+});
+</script>
+{% endblock %}

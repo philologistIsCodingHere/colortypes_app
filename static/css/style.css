@@ -1,0 +1,567 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+    color: white;
+}
+
+.header h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+.flash-messages {
+    margin-bottom: 20px;
+}
+
+.flash-message {
+    background: #ff4757;
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: 500;
+}
+
+.upload-section {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+
+.upload-card {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    text-align: center;
+    max-width: 500px;
+    width: 100%;
+}
+
+.upload-icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+}
+
+.upload-card h2 {
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.upload-card p {
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.file-input-wrapper {
+    margin-bottom: 20px;
+}
+
+.file-input-wrapper input[type="file"] {
+    display: none;
+}
+
+.file-input-label {
+    display: flex;
+    align-items: center;
+    background: #f8f9fa;
+    border: 2px dashed #dee2e6;
+    border-radius: 10px;
+    padding: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.file-input-label:hover {
+    border-color: #667eea;
+    background: #f0f4ff;
+}
+
+.file-input-text {
+    flex: 1;
+    color: #666;
+}
+
+.file-input-button {
+    background: #667eea;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: 500;
+}
+
+.analyze-button {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    width: 100%;
+}
+
+.analyze-button:hover {
+    transform: translateY(-2px);
+}
+
+.tips {
+    margin-top: 30px;
+    text-align: left;
+}
+
+.tips h3 {
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.tips ul {
+    list-style: none;
+    color: #666;
+}
+
+.tips li {
+    padding: 5px 0;
+    padding-left: 20px;
+    position: relative;
+}
+
+.tips li:before {
+    content: "•";
+    color: #667eea;
+    position: absolute;
+    left: 0;
+}
+
+.info-section {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+.info-section h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.color-types-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.color-type-card {
+    padding: 25px;
+    border-radius: 15px;
+    text-align: center;
+    transition: transform 0.3s ease;
+    color: white;
+}
+
+.color-type-card:hover {
+    transform: translateY(-5px);
+}
+
+.color-type-card.winter {
+    background: linear-gradient(135deg, #4A90E2, #667eea);
+}
+
+.color-type-card.spring {
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+}
+
+.color-type-card.summer {
+    background: linear-gradient(135deg, #FF69B4, #FF1493);
+}
+
+.color-type-card.autumn {
+    background: linear-gradient(135deg, #FF8C00, #FF4500);
+}
+
+.color-type-card h3 {
+    margin-bottom: 10px;
+    font-size: 1.3rem;
+}
+
+.result-content {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+.result-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.back-button {
+    background: #6c757d;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    margin-right: 20px;
+    transition: background 0.3s ease;
+}
+
+.back-button:hover {
+    background: #5a6268;
+    color: white;
+    text-decoration: none;
+}
+
+.result-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+}
+
+.image-section, .parameters-section {
+    margin-bottom: 30px;
+}
+
+.image-section h3, .parameters-section h3 {
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.image-container {
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.image-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.parameters-grid {
+    display: grid;
+    gap: 15px;
+}
+
+.parameter-card {
+    display: flex;
+    align-items: center;
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    border-left: 4px solid #667eea;
+}
+
+.parameter-icon {
+    font-size: 1.5rem;
+    margin-right: 15px;
+}
+
+.parameter-info {
+    flex: 1;
+}
+
+.parameter-name {
+    display: block;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.parameter-value {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.main-result {
+    background: #f8f9fa;
+    padding: 30px;
+    border-radius: 15px;
+    border-left: 6px solid;
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.result-icon {
+    font-size: 3rem;
+    margin-right: 20px;
+}
+
+.result-text h3 {
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.result-text h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.probabilities-section {
+    margin-bottom: 30px;
+}
+
+.probabilities-section h3 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.probability-item {
+    margin-bottom: 15px;
+}
+
+.probability-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.probability-name {
+    font-weight: 500;
+}
+
+.probability-value {
+    font-weight: 600;
+    color: #333;
+}
+
+.probability-bar {
+    background: #e9ecef;
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.probability-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.5s ease;
+}
+
+.recommendations-section h3 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.recommendation-card {
+    background: #f8f9fa;
+    padding: 25px;
+    border-radius: 15px;
+    border-left: 4px solid #667eea;
+}
+
+.recommendation-card h4 {
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.recommendation-item {
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+.recommendation-item:last-child {
+    margin-bottom: 0;
+}
+
+.action-buttons {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.new-analysis-button {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 15px 30px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.new-analysis-button:hover {
+    transform: translateY(-2px);
+    color: white;
+    text-decoration: none;
+}
+
+.footer {
+    text-align: center;
+    margin-top: 50px;
+    color: white;
+    opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+    .result-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .header h1 {
+        font-size: 2rem;
+    }
+    
+    .upload-card {
+        padding: 20px;
+    }
+}
+/* Добавьте эти стили в конец файла */
+
+/* Стили для цветотипов */
+.color-winter {
+    border-left-color: #4A90E2 !important;
+}
+
+.color-spring {
+    border-left-color: #FFD700 !important;
+}
+
+.color-summer {
+    border-left-color: #FF69B4 !important;
+}
+
+.color-autumn {
+    border-left-color: #FF8C00 !important;
+}
+
+.color-winter-text {
+    color: #4A90E2 !important;
+}
+
+.color-spring-text {
+    color: #FFD700 !important;
+}
+
+.color-summer-text {
+    color: #FF69B4 !important;
+}
+
+.color-autumn-text {
+    color: #FF8C00 !important;
+}
+
+/* Стили для прогресс-баров через data-атрибуты */
+.probability-fill[data-width] {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.5s ease;
+}
+
+/* Цвета по умолчанию для прогресс-баров (на случай если JS не сработает) */
+.probability-fill[data-color-type="зима-❄️"] {
+    background-color: #4A90E2;
+}
+
+.probability-fill[data-color-type="весна-🌼"] {
+    background-color: #FFD700;
+}
+
+.probability-fill[data-color-type="лето-🌸"] {
+    background-color: #FF69B4;
+}
+
+.probability-fill[data-color-type="осень-🍁"] {
+    background-color: #FF8C00;
+}
+
+/* Ширины по умолчанию (JS установит правильные значения) */
+.probability-fill {
+    width: 0%;
+}
+
+/* Стили для отображения имени файла */
+.file-name-display {
+    margin-top: 10px;
+    padding: 10px;
+    background: #e9f7ef;
+    border: 1px solid #2ecc71;
+    border-radius: 5px;
+    color: #27ae60;
+    font-weight: 500;
+    display: none; /* Сначала скрыто */
+}
+
+/* Обновляем стили для file input */
+.file-input-wrapper {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.file-input-wrapper input[type="file"] {
+    display: none;
+}
+
+.file-input-label {
+    display: flex;
+    align-items: center;
+    background: #f8f9fa;
+    border: 2px dashed #dee2e6;
+    border-radius: 10px;
+    padding: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-height: 60px;
+}
+
+.file-input-label:hover {
+    border-color: #667eea;
+    background: #f0f4ff;
+}
+
+.file-input-text {
+    flex: 1;
+    color: #666;
+}
+
+.file-input-button {
+    background: #667eea;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: 500;
+}
+
+/* Подсветка когда файл выбран */
+.file-input-label.has-file {
+    border-color: #2ecc71;
+    background: #e9f7ef;
+}
+
+.file-input-label.has-file .file-input-text {
+    color: #27ae60;
+    font-weight: 500;
+}
+
