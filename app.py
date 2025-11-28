@@ -73,7 +73,7 @@ def extract_features(image_path):
         
         with open(processed_path, 'rb') as img_file:
             image_base64 = base64.b64encode(img_file.read()).decode('utf-8')
-            return features, image_base64
+        return features, image_base64
         
     except Exception as e:
         print(f"Ошибка в extract_features: {str(e)}")
