@@ -21,14 +21,12 @@ def load_model():
         return model
     except:
         return None
-
+    
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 def extract_features(image_path):
     try:
-        print(f"🔍 Пытаемся загрузить: {image_path}")
-        
         if not os.path.exists(image_path):
             print(f"Файл не существует: {image_path}")
             return None, None
@@ -44,8 +42,6 @@ def extract_features(image_path):
         gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
         
         faces = face_cascade.detectMultiScale(gray, 1.1, 5, minSize=(30, 30))
-        
-        print(f"🔍 Найдено лиц: {len(faces)}")
         
         if len(faces) == 0:
             print("Лица не обнаружены")
@@ -93,7 +89,6 @@ def analyze():
         return redirect('/')
     
     if 'photo' not in request.files:
-        print("Файл не найден в request.files")
         flash('Пожалуйста, выберите файл')
         return redirect('/')
     
