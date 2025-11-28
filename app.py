@@ -71,7 +71,7 @@ def extract_features(image_path):
             'saturation': float(np.mean(s))
         }
         
-        with open(processed_path, 'rb') as img_file:
+        with open(image_path, 'rb') as img_file:
             image_base64 = base64.b64encode(img_file.read()).decode('utf-8')
         return features, image_base64
         
